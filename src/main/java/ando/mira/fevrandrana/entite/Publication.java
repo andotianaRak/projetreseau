@@ -1,7 +1,7 @@
-package entite;
+package ando.mira.fevrandrana.entite;
 
-import database.BasicsFunctions;
-import database.DBConnect;
+import ando.mira.fevrandrana.database.BasicsFunctions;
+import ando.mira.fevrandrana.database.DBConnect;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -11,7 +11,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-import metier.GestionDate;
+import ando.mira.fevrandrana.metier.GestionDate;
 
 public class Publication extends GestionDate {
 
@@ -76,7 +76,7 @@ public class Publication extends GestionDate {
     }
 
     public void setContenupublication(String contenupublication) {
-        this.contenupublication = contenupublication.replaceAll("'","''");
+        this.contenupublication = contenupublication.replaceAll("'", "''");
     }
 
     public Time getHeurepublication() {
@@ -137,6 +137,7 @@ public class Publication extends GestionDate {
         } finally {
             try {
                 rs.close();
+                c.close();
             } catch (SQLException ex) {
             }
         }
@@ -170,7 +171,7 @@ public class Publication extends GestionDate {
         String queryTag = "DELETE FROM tagbypublication WHERE idpublication=" + idpublication + ";commit;";
         Statement stmt = null;
         String query = "DELETE FROM publication WHERE idpublication=" + idpublication + ";commit;";
-        
+
         try {
             stmt = c.createStatement();
             stmt.executeUpdate(queryTag);
@@ -180,6 +181,12 @@ public class Publication extends GestionDate {
             stmt.executeUpdate(query);
 
         } catch (SQLException ex) {
+        } finally {
+            try {
+                stmt.close();
+                c.close();
+            } catch (SQLException ex) {
+            }
         }
     }
 

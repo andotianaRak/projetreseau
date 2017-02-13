@@ -1,14 +1,15 @@
-package metier;
+package ando.mira.fevrandrana.metier;
 
-import database.BasicsFunctions;
-import database.DBConnect;
-import entite.Utilisateur;
+import ando.mira.fevrandrana.database.BasicsFunctions;
+import ando.mira.fevrandrana.database.DBConnect;
+import ando.mira.fevrandrana.entite.Utilisateur;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+
 
 public class Searching {
 

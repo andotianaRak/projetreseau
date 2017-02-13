@@ -1,11 +1,11 @@
-package metier;
+package ando.mira.fevrandrana.metier;
 
-import database.BasicsFunctions;
-import database.DBConnect;
-import entite.ConnexionDeconnexion;
-import entite.DetPublication;
-import entite.Tag;
-import entite.Utilisateur;
+import ando.mira.fevrandrana.database.BasicsFunctions;
+import ando.mira.fevrandrana.database.DBConnect;
+import ando.mira.fevrandrana.entite.ConnexionDeconnexion;
+import ando.mira.fevrandrana.entite.DetPublication;
+import ando.mira.fevrandrana.entite.Tag;
+import ando.mira.fevrandrana.entite.Utilisateur;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

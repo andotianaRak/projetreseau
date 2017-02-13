@@ -1,4 +1,4 @@
-package database;
+package ando.mira.fevrandrana.database;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -47,6 +47,12 @@ public class BasicsFunctions {
             stmt.executeUpdate(query);
         } catch (SQLException ex) {
             Logger.getLogger(BasicsFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                stmt.close();
+                c.close();
+            } catch (SQLException ex) {
+            }
         }
     }
 
@@ -73,7 +79,12 @@ public class BasicsFunctions {
                 hasnext = ret.next();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(BasicsFunctions.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                stmt.close();
+                c.close();
+            } catch (SQLException ex) {
+            }
         }
         return rep;
     }

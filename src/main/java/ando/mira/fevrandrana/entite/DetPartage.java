@@ -1,4 +1,4 @@
-package entite;
+package ando.mira.fevrandrana.entite;
 
 import java.sql.Date;
 import java.sql.Time;

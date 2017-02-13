@@ -1,10 +1,11 @@
-package entite;
+package ando.mira.fevrandrana.entite;
 
-import database.BasicsFunctions;
-import database.DBConnect;
+import ando.mira.fevrandrana.database.BasicsFunctions;
+import ando.mira.fevrandrana.database.DBConnect;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Time;
 
 public class DemandeAbonnement {
@@ -73,5 +74,10 @@ public class DemandeAbonnement {
         String query = "DELETE FROM demandeabonnement "
                 + " WHERE iduserdemandeur=" + this.iduserdemandeur + " AND iduserdemander=" + this.iduserdemander;
         ResultSet execquery = bf.execquery(query, c);
+        try {
+            execquery.close();
+            c.close();
+        } catch (SQLException ex) {
+        }
     }
 }

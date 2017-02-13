@@ -1,9 +1,9 @@
-package entite;
+package ando.mira.fevrandrana.entite;
 
-import database.BasicsFunctions;
+import ando.mira.fevrandrana.database.BasicsFunctions;
 import java.sql.Date;
 import java.sql.Time;
-import metier.GestionDate;
+import ando.mira.fevrandrana.metier.GestionDate;
 
 public class Partage extends GestionDate {
 

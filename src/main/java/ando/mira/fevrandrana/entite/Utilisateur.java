@@ -1,7 +1,9 @@
-package entite;
+package ando.mira.fevrandrana.entite;
 
-import database.BasicsFunctions;
-import database.DBConnect;
+import ando.mira.fevrandrana.database.BasicsFunctions;
+import ando.mira.fevrandrana.database.DBConnect;
+import ando.mira.fevrandrana.entite.DetPartage;
+import ando.mira.fevrandrana.entite.DetPublication;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -126,6 +128,12 @@ public class Utilisateur {
                 i = rs.getInt("iduser");
             }
         } catch (SQLException ex) {
+        } finally {
+            try {
+                rs.close();
+                c.close();
+            } catch (SQLException ex) {
+            }
         }
         return i;
     }
@@ -144,6 +152,11 @@ public class Utilisateur {
             while (rs.next()) {
                 i = rs.getString("imguser");
             }
+        } catch (SQLException ex) {
+        }
+        try {
+            rs.close();
+            c.close();
         } catch (SQLException ex) {
         }
         return i;
@@ -165,6 +178,11 @@ public class Utilisateur {
 
                 hasnext = rs.next();
             }
+        } catch (SQLException ex) {
+        }
+        try {
+            rs.close();
+            c.close();
         } catch (SQLException ex) {
         }
         return repo;
@@ -192,6 +210,11 @@ public class Utilisateur {
             }
         } catch (SQLException ex) {
         }
+        try {
+            rs.close();
+            c.close();
+        } catch (SQLException ex) {
+        }
     }
 
     public int getNombreDePartages() {
@@ -212,6 +235,7 @@ public class Utilisateur {
         } finally {
             try {
                 rs.close();
+                c.close();
             } catch (SQLException ex) {
             }
         }
@@ -236,6 +260,7 @@ public class Utilisateur {
         } finally {
             try {
                 rs.close();
+                c.close();
             } catch (SQLException ex) {
             }
         }
@@ -273,6 +298,7 @@ public class Utilisateur {
         } finally {
             try {
                 rs.close();
+                c.close();
             } catch (SQLException ex) {
             }
         }
@@ -330,6 +356,7 @@ public class Utilisateur {
         } finally {
             try {
                 rs.close();
+                c.close();
             } catch (SQLException ex) {
             }
         }
@@ -374,6 +401,7 @@ public class Utilisateur {
         } finally {
             try {
                 rs.close();
+                c.close();
             } catch (SQLException ex) {
             }
         }
@@ -414,6 +442,7 @@ public class Utilisateur {
         } finally {
             try {
                 rs.close();
+                c.close();
             } catch (SQLException ex) {
             }
         }
@@ -497,6 +526,7 @@ public class Utilisateur {
         } finally {
             try {
                 rs.close();
+                c.close();
             } catch (SQLException ex) {
             }
         }
@@ -604,6 +634,7 @@ public class Utilisateur {
         } finally {
             try {
                 rs.close();
+                c.close();
             } catch (SQLException ex) {
             }
         }
@@ -637,6 +668,11 @@ public class Utilisateur {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        try {
+            rs.close();
+            c.close();
+        } catch (SQLException ex) {
+        }
         return val;
     }
 
@@ -647,6 +683,11 @@ public class Utilisateur {
             Connection c = db.getconn();
             Statement st = c.createStatement();
             st.executeUpdate("UPDATE utilisateur  SET pwduser='" + motdepasse + "' where iduser=" + this.getIduser());
+            try {
+                st.close();
+                c.close();
+            } catch (SQLException ex) {
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -713,6 +754,7 @@ public class Utilisateur {
         } finally {
             try {
                 rs.close();
+                c.close();
             } catch (SQLException ex) {
             }
         }
@@ -755,6 +797,7 @@ public class Utilisateur {
         } finally {
             try {
                 rs.close();
+                c.close();
             } catch (SQLException ex) {
             }
         }

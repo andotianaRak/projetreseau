@@ -1,6 +1,6 @@
-package entite;
+package ando.mira.fevrandrana.entite;
 
-import database.BasicsFunctions;
+import ando.mira.fevrandrana.database.BasicsFunctions;
 
 public class TagByPublication {
 

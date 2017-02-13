@@ -1,8 +1,8 @@
-package metier;
+package ando.mira.fevrandrana.metier;
 
-import entite.Publication;
-import entite.Tag;
-import entite.TagByPublication;
+import ando.mira.fevrandrana.entite.Publication;
+import ando.mira.fevrandrana.entite.Tag;
+import ando.mira.fevrandrana.entite.TagByPublication;
 import java.sql.Connection;
 import java.util.List;
 

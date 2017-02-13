@@ -1,4 +1,4 @@
-package entite;
+package ando.mira.fevrandrana.entite;
 
 public class DetPublication extends Publication {
 

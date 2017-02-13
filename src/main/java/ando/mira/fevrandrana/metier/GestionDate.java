@@ -1,4 +1,4 @@
-package metier;
+package ando.mira.fevrandrana.metier;
 
 import java.sql.Date;
 import java.sql.Time;

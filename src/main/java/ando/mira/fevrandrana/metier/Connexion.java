@@ -1,7 +1,7 @@
-package metier;
+package ando.mira.fevrandrana.metier;
 
-import database.BasicsFunctions;
-import database.DBConnect;
+import ando.mira.fevrandrana.database.BasicsFunctions;
+import ando.mira.fevrandrana.database.DBConnect;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

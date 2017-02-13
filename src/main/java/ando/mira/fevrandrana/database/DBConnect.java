@@ -1,4 +1,4 @@
-package database;
+package ando.mira.fevrandrana.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
