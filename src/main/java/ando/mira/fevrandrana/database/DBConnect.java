@@ -10,9 +10,9 @@ public class DBConnect {
 
     public Connection getconn() {
         Connection con = null;
-        String url = "jdbc:postgresql://ec2-54-225-67-3.compute-1.amazonaws.com/dbqecfdetju6j7";
-        String user = "rmahxdpzduhhbf";
-        String password = "e1231355b240d62709de8966a27181e9a208e58d2927779ce18737168aa2f2d1";
+        String url = "jdbc:postgresql://ec2-54-235-204-221.compute-1.amazonaws.com/d5tghfv9r46igs";
+        String user = "dqusxeupqproex";
+        String password = "3ea0d0ca67fcbfa6ca26c2b51e3b9974dbaf761084f538331f4336deccf817cd";
         try {
             con = DriverManager.getConnection(url, user, password);
         } catch (SQLException ex) {
