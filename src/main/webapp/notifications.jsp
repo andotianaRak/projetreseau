@@ -6,7 +6,6 @@
 </script>
 
 <div class="animated fadeIn container container-timeline">
-    
     <div class="col-md-10 no-paddin-xs">
         <!-- notification list-->
         <div class="col-md-7 no-paddin-xs">

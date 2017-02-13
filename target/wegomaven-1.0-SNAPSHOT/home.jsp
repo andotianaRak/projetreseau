@@ -299,6 +299,7 @@
                 data: 'shid=<% out.print(u.getIduser()); %>&confid=1&publication=' + document.getElementById('publication').value
                         + '&longitude=' + longi + '&latitude=' + lati,
                 success: function (code_html, statut) {
+                    document.getElementById("publication").innerHTML = "";
                     $http.get("traite/publicationsfortimeline.jsp?iduser=<% out.print(u.getIduser());%>").success(function (response) {
                         $scope.publications = response; //ajax request to fetch data into $scope.data
                     });

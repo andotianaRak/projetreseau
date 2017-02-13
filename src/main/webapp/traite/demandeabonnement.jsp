@@ -4,6 +4,7 @@
 <%@page import="ando.mira.fevrandrana.entite.DemandeAbonnement"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    response.addHeader("Access-Control-Allow-Origin", "*");
     String demandeur = request.getParameter("idmoi");
     String demander = request.getParameter("idlui");
     

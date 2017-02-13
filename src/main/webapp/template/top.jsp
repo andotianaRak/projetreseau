@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="en"  ng-app="angularTable">
     <head>
-        <title>BookPost</title>
+        <title>ShareIT</title>
         <%@ include file="../inc/inc-head.jsp" %>
         <script src="assets/js/angular.min.js"></script>
         <script src="assets/js/dirPagination.js"></script>
@@ -48,7 +48,7 @@
                             <script>
                                 $("#btnsearch").click(function () {
                                     location.replace("search.jsp?q=" + document.getElementById("searchbar").value);
-                                    $.ajax({
+                                 /*   $.ajax({
                                         url: 'searchresult.jsp',
                                         type: 'GET',
                                         dataType: 'html',
@@ -62,7 +62,7 @@
                                         complete: function (resultat, statut) {
 
                                         }
-                                    });
+                                    });*/
                                 });
                             </script>
                         </form>
@@ -154,7 +154,7 @@
                                                 <div class="row">
                                                     <div class="col-xs-3">
                                                         <div class="avatar">
-                                                            <img src="img/{{activ.imguser}}" class="avatar" alt="user profile image">
+                                                            <img src="img/{{activ.imgpartageur}}" class="avatar" alt="user profile image">
                                                         </div>
                                                     </div>
                                                     <div ng-show="montrerpublierA(activ.nomprenompartageur)" class="col-xs-9">
@@ -178,7 +178,7 @@
                                                         </div>
                                                         <div class="col-xs-9" ng-hide="montrerpartagesaproprepublicationA(activ.iduser, activ.idpartageur)">
                                                             <b><a href="profile.jsp?uid={{activ.idpartageur}}&midh=<% out.print(u.getIduser()); %>" class="post-user-name">{{activ.nomprenompartageur}}</a></b> 
-                                                            <b>a partag&eacute; la publication de </b> 
+                                                            <b>a partag&eacute; </b> la publication de 
                                                             <b><a href="profile.jsp?uid={{activ.iduser}}&midh=<% out.print(u.getIduser());%>&idshare={{activ.idpartageur}}" class="post-user-name">{{activ.nomprenom}}.</a></b>. 
                                                             <span class="timeago" >{{tempsreel(activ.datepartage, activ.heurepartage)}}</span>
                                                         </div>

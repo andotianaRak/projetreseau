@@ -6,6 +6,7 @@
 <%@page import="ando.mira.fevrandrana.metier.Connexion"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    response.addHeader("Access-Control-Allow-Origin", "*");
     String email = request.getParameter("mail");
     String pass = request.getParameter("pass");
     Connexion c = new Connexion(email, pass);

@@ -6,6 +6,7 @@
 <%@page import="org.json.JSONArray"%>
 <%@page import="org.json.JSONObject"%>
 <%
+    response.addHeader("Access-Control-Allow-Origin", "*");
     String motcles = request.getParameter("q");
     Searching search = new Searching();
     List<Utilisateur> listuser = search.getSearchResult(motcles);

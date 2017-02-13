@@ -30,6 +30,7 @@
             obj.put("longitude", ldp.getLongitude());
             obj.put("nbrpa", ldp.getNbrpa());
             obj.put("nomprenom", ldp.getNomPrenom());
+            obj.put("imguser",ldp.getImguser());
             arr.put(obj);
         } catch (JSONException ex) {
         }

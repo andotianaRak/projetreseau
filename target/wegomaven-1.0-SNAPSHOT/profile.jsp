@@ -161,7 +161,7 @@
                         </div>
                         <div class="media activity-item" ng-repeat="a in publications">
                             <a href="#" class="pull-left">
-                                <img src="guy-2.jpg" alt="img" class="media-object avatar">
+                                <img src="img/{{a.imguser}}" alt="img" class="media-object avatar">
                             </a>
                             <div class="media-body">
                                 <p class="activity-title"><a href="#">{{a.nomprenom}}</a> a publi&eacute; <small class="text-muted">- {{tempsreel(a.datepublication, a.heurepublication)}}</small></p>
@@ -196,45 +196,6 @@
                                             }
                                         %>
                                 </ul>
-                                <script>
-                                        var app = angular.module('angularTable', ['angularUtils.directives.dirPagination']);
-
-                                        app.controller('listdata', function ($scope, $http) {
-                                            $scope.publications = []; //declare an empty array
-                                            $http.get("traite/publicationutilisateur.jsp?iduser=<% out.print(profile.getIduser());%>").success(function (response) {
-                                                $('#lala').hide();
-                                                $scope.publications = response;  //ajax request to fetch data into $scope.data
-                                            });
-                                            $scope.deletethis = function (idee) {
-                                                $.ajax({
-                                                    url: 'traite/supprimerpub.jsp',
-                                                    type: 'POST',
-                                                    dataType: 'html',
-                                                    data: 'idpublication=' + idee,
-                                                    success: function (code_html, statut) {
-                                                        $http.get("traite/publicationutilisateur.jsp?iduser=<% out.print(profile.getIduser());%>").success(function (response) {
-                                                            $scope.publications = response;  //ajax request to fetch data into $scope.data
-                                                        });
-                                                    },
-                                                    error: function (resultat, statut, erreur) {
-                                                        alert("erreur");
-                                                    },
-                                                    complete: function (resultat, statut) {
-                                                    }
-                                                });
-                                            };
-                                            $scope.tempsreel = function (date, heure) {
-                                                var an = Number(date.split("-")[2]);
-                                                var mois = Number(date.split("-")[1]);
-                                                var jour = Number(date.split("-")[0]);
-                                                var h = Number(heure.split(":")[0]);
-                                                var min = Number(heure.split(":")[1]);
-                                                var sec = Number(heure.split(":")[2]);
-                                                var dateheure = new Date(an, mois - 1, jour, h, min, sec, 0);
-                                                return moment(dateheure.getTime()).fromNow();
-                                            };
-                                        });
-                                </script>
                             </div>
                         </div>
                         <%
@@ -276,7 +237,7 @@
                                 </p>
                                 <p class="data-row">
                                     <span class="data-name">Photo</span>
-                                    <span class="data-value"><img src="<% out.print(profile.getImguser());%>" alt="img-profile"></span>
+                                    <span class="data-value" style="width:100px !important;"><img src="img/<% out.print(profile.getImguser());%>" alt="img-profile" class="img img-responsive"></span>
                                 </p>
                             </div>
                             <div class="contact_info">
@@ -364,6 +325,84 @@
         </div>
     </div>
 </div>
+
+<script>
+    var app = angular.module('angularTable', ['angularUtils.directives.dirPagination']);
+    app.controller('notifCtrl', function ($scope, $interval, $http) {
+        $scope.activities = [];
+        $http.get("traite/activites.jsp?iduser=<% out.print(u.getIduser());%>").success(function (response) {
+            $scope.activities = response;
+        });
+        var timer = $interval(function () {
+            $http.get("traite/activites.jsp?iduser=<% out.print(u.getIduser());%>").success(function (response) {
+                $scope.activities = response;
+            });
+        }, 60000);
+        $scope.montrerpartagesaproprepublicationA = function (idpartageur, iduser) {
+            if (iduser === idpartageur)
+                return true;
+            else
+                return false;
+        };
+        $scope.montrerpublierA = function (nomprenom) {
+            if (nomprenom === "null null")
+                return true;
+            else if (nomprenom !== "null null")
+                return false;
+        };
+        $scope.montrerpartagerA = function (nomprenom) {
+            if (nomprenom === "null null")
+                return false;
+            else if (nomprenom !== "null null")
+                return true;
+        };
+        $scope.tempsreel = function (date, heure) {
+            var an = Number(date.split("-")[2]);
+            var mois = Number(date.split("-")[1]);
+            var jour = Number(date.split("-")[0]);
+            var h = Number(heure.split(":")[0]);
+            var min = Number(heure.split(":")[1]);
+            var sec = Number(heure.split(":")[2]);
+            var dateheure = new Date(an, mois - 1, jour, h, min, sec, 0);
+            return moment(dateheure.getTime()).fromNow();
+        };
+    });
+    app.controller('listdata', function ($scope, $http) {
+        $scope.publications = []; //declare an empty array
+        $http.get("traite/publicationutilisateur.jsp?iduser=<% out.print(profile.getIduser());%>").success(function (response) {
+            $('#lala').hide();
+            $scope.publications = response;  //ajax request to fetch data into $scope.data
+        });
+        $scope.deletethis = function (idee) {
+            $.ajax({
+                url: 'traite/supprimerpub.jsp',
+                type: 'POST',
+                dataType: 'html',
+                data: 'idpublication=' + idee,
+                success: function (code_html, statut) {
+                    $http.get("traite/publicationutilisateur.jsp?iduser=<% out.print(profile.getIduser());%>").success(function (response) {
+                        $scope.publications = response;  //ajax request to fetch data into $scope.data
+                    });
+                },
+                error: function (resultat, statut, erreur) {
+                    alert("erreur");
+                },
+                complete: function (resultat, statut) {
+                }
+            });
+        };
+        $scope.tempsreel = function (date, heure) {
+            var an = Number(date.split("-")[2]);
+            var mois = Number(date.split("-")[1]);
+            var jour = Number(date.split("-")[0]);
+            var h = Number(heure.split(":")[0]);
+            var min = Number(heure.split(":")[1]);
+            var sec = Number(heure.split(":")[2]);
+            var dateheure = new Date(an, mois - 1, jour, h, min, sec, 0);
+            return moment(dateheure.getTime()).fromNow();
+        };
+    });
+</script>
 
 <script src="assets/js/dirPagination.js"></script>
 <%@ include file="template/bottom.jsp" %>

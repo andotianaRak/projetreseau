@@ -71,7 +71,45 @@
 </div>
 <script>
     var app = angular.module('angularTable', ['angularUtils.directives.dirPagination']);
-
+    app.controller('notifCtrl', function ($scope, $interval, $http) {
+        $scope.activities = [];
+        $http.get("traite/activites.jsp?iduser=<% out.print(u.getIduser());%>").success(function (response) {
+            $scope.activities = response;
+        });
+        var timer = $interval(function () {
+            $http.get("traite/activites.jsp?iduser=<% out.print(u.getIduser());%>").success(function (response) {
+                $scope.activities = response;
+            });
+        }, 60000);
+        $scope.montrerpartagesaproprepublicationA = function (idpartageur, iduser) {
+            if (iduser === idpartageur)
+                return true;
+            else
+                return false;
+        };
+        $scope.montrerpublierA = function (nomprenom) {
+            if (nomprenom === "null null")
+                return true;
+            else if (nomprenom !== "null null")
+                return false;
+        };
+        $scope.montrerpartagerA = function (nomprenom) {
+            if (nomprenom === "null null")
+                return false;
+            else if (nomprenom !== "null null")
+                return true;
+        };
+        $scope.tempsreel = function (date, heure) {
+            var an = Number(date.split("-")[2]);
+            var mois = Number(date.split("-")[1]);
+            var jour = Number(date.split("-")[0]);
+            var h = Number(heure.split(":")[0]);
+            var min = Number(heure.split(":")[1]);
+            var sec = Number(heure.split(":")[2]);
+            var dateheure = new Date(an, mois - 1, jour, h, min, sec, 0);
+            return moment(dateheure.getTime()).fromNow();
+        };
+    });
     app.controller('listdata', function ($scope, $http) {
 
         $scope.names = []; //declare an empty array

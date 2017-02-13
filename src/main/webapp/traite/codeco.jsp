@@ -5,6 +5,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
+    response.addHeader("Access-Control-Allow-Origin", "*");
     GestionDate gd = new GestionDate();
     Date date = gd.getDateAuj();
     Time he = gd.getHeureAuj();

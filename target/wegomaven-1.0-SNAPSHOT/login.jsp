@@ -57,6 +57,7 @@
                                 </div>
                                 <script>
                                     $('#ajax-loading2').hide();
+                                    $('#ajax-loading3').hide();
                                     $("#login").click(function () {
                                         $('#ajax-loading2').show();
                                         $('#login').hide();
@@ -104,13 +105,37 @@
                                         <input id="nom" name="nom" placeholder="nom" type="text">
                                         <input id="prenom" name="prenom" placeholder="pr&eacute;nom(s)" type="text">
                                         <input id="pwd" name="pwd" placeholder="******" type="password">
-                                        <button type="submit" name="register" class="btn btn-danger">
-                                            <i class="fa fa-user-plus"></i>
-                                            S'incrire
-                                        </button>
+                                        <input type="submit" id="signunp" name="signup" class="btn btn-danger" value="S'inscrire">
+                                        <img id="ajax-loading3" src="img/loading.gif" alt="chargement" />
                                     </form>
                                 </div> 
                             </div>
+                            <script>
+                                $("#signup").click(function () {
+                                    $('#ajax-loading3').show();
+                                    $('#signunp').hide();
+                                    $.ajax({
+                                        url: 'mobile/insertUser.jsp',
+                                        type: 'POST',
+                                        dataType: 'html',
+                                        data: 'email=' + document.getElementById('email').value +
+                                                '&motdepasse=' + document.getElementById('pwd').value +
+                                                '&nom='+document.getElementById('nom').value +
+                                                '&prenom='+document.getElementById('prenom').value,
+                                        success: function (code_html, statut) {
+                                            //$('#ajax-loading3').hide();
+                                            document.location.href = "";
+                                            //  $('#login').show();
+                                        },
+                                        error: function (resultat, statut, erreur) {
+                                            alert("erreur");
+                                        },
+                                        complete: function (resultat, statut) {
+                                            //   $('#ajax-loading3').hide();
+                                        }
+                                    });
+                                });
+                            </script>
                         </div>
                     </div><!-- end register and login form -->
                 </div>

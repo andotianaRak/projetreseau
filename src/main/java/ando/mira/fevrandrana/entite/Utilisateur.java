@@ -2,8 +2,6 @@ package ando.mira.fevrandrana.entite;
 
 import ando.mira.fevrandrana.database.BasicsFunctions;
 import ando.mira.fevrandrana.database.DBConnect;
-import ando.mira.fevrandrana.entite.DetPartage;
-import ando.mira.fevrandrana.entite.DetPublication;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -269,7 +267,7 @@ public class Utilisateur {
 
     public List<DetPublication> getAllPublications() {
         List<DetPublication> liste = new ArrayList();
-        String query = "SELECT * FROM detpub WHERE iduser=" + this.getIduser() + " ORDER BY idpublication ASC";
+        String query = "SELECT * FROM detpub WHERE iduser=" + this.getIduser() + " ORDER BY idpublication DESC";
         DBConnect db = new DBConnect();
         Connection c = db.getconn();
         BasicsFunctions bf = new BasicsFunctions();
@@ -290,6 +288,57 @@ public class Utilisateur {
                 tmp.setNbrpa(rs.getInt("nbrpa"));
                 tmp.setNomuser(rs.getString("nomuser"));
                 tmp.setPrenomuser(rs.getString("prenomuser"));
+                tmp.setImguser(rs.getString("imguser"));
+                liste.add(tmp);
+                hasnext = rs.next();
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                rs.close();
+                c.close();
+            } catch (SQLException ex) {
+            }
+        }
+        return liste;
+    }
+
+    public List<DetPartage> getAllPartages() {
+        List<DetPartage> liste = new ArrayList();
+        String query = "SELECT * FROM detpartage WHERE idpartageur=" + this.getIduser() + " ORDER BY idpublication DESC";
+        DBConnect db = new DBConnect();
+        Connection c = db.getconn();
+        BasicsFunctions bf = new BasicsFunctions();
+        ResultSet rs = bf.execquery(query, c);
+        try {
+            boolean hasnext = rs.next();
+            while (hasnext) {
+                DetPartage tmp = new DetPartage();
+                tmp.setIduser(rs.getInt("iduser"));
+                tmp.setContenupublication(rs.getString("contenupublication"));
+                tmp.setDatepublication(rs.getDate("datepublication"));
+                tmp.setHeurepublication(rs.getTime("heurepublication"));
+                tmp.setConfidentialite(rs.getString("confidentialite"));
+                tmp.setIdconfidentialite(rs.getInt("idconfidentialite"));
+                tmp.setIdpublication(rs.getInt("idpublication"));
+                tmp.setLatitude(rs.getDouble("latitude"));
+                tmp.setLongitude(rs.getDouble("longitude"));
+                tmp.setNbrpa(rs.getInt("nbrpa"));
+                tmp.setNomuser(rs.getString("nomuser"));
+                tmp.setPrenomuser(rs.getString("prenomuser"));
+                tmp.setImguser(rs.getString("imguser"));
+
+                tmp.setIdpartage(rs.getInt("idpartage"));
+                tmp.setDatepartage(rs.getDate("datepartage"));
+                tmp.setHeurepartage(rs.getTime("heurepartage"));
+                tmp.setLongpartage(rs.getLong("longpartage"));
+                tmp.setLatpartage(rs.getLong("latpartage"));
+                tmp.setIdpartageur(rs.getInt("idpartageur"));
+                tmp.setNompartageur(rs.getString("nompartageur"));
+                tmp.setPrenompartageur(rs.getString("prenompartageur"));
+                tmp.setEmailpartageur(rs.getString("emailpartageur"));
+                tmp.setImgpartageur(rs.getString("imgpartageur"));
                 liste.add(tmp);
                 hasnext = rs.next();
             }
@@ -325,7 +374,6 @@ public class Utilisateur {
             while (hasnext) {
                 DetPartage tmp = new DetPartage();
                 tmp.setIduser(rs.getInt("iduser"));
-                tmp.setImguser(getImgUtilisateur(rs.getInt("iduser")));
                 tmp.setContenupublication(rs.getString("contenupublication"));
                 tmp.setDatepublication(rs.getDate("datepublication"));
                 tmp.setHeurepublication(rs.getTime("heurepublication"));
@@ -337,6 +385,7 @@ public class Utilisateur {
                 tmp.setNbrpa(rs.getInt("nbrpa"));
                 tmp.setNomuser(rs.getString("nomuser"));
                 tmp.setPrenomuser(rs.getString("prenomuser"));
+                tmp.setImguser(rs.getString("imguser"));
 
                 tmp.setIdpartage(rs.getInt("idpartage"));
                 tmp.setDatepartage(rs.getDate("datepartage"));
@@ -380,7 +429,6 @@ public class Utilisateur {
             while (hasnext) {
                 DetPublication tmp = new DetPublication();
                 tmp.setIduser(rs.getInt("iduser"));
-                tmp.setImguser(getImgUtilisateur(rs.getInt("iduser")));
                 System.out.println(tmp.getImguser());
                 tmp.setContenupublication(rs.getString("contenupublication"));
                 tmp.setDatepublication(rs.getDate("datepublication"));
@@ -393,6 +441,7 @@ public class Utilisateur {
                 tmp.setNbrpa(rs.getInt("nbrpa"));
                 tmp.setNomuser(rs.getString("nomuser"));
                 tmp.setPrenomuser(rs.getString("prenomuser"));
+                tmp.setImguser(rs.getString("imguser"));
                 liste.add(tmp);
                 hasnext = rs.next();
             }
@@ -626,6 +675,7 @@ public class Utilisateur {
                 tmp.setNbrpa(rs.getInt("nbrpa"));
                 tmp.setNomuser(rs.getString("nomuser"));
                 tmp.setPrenomuser(rs.getString("prenomuser"));
+                tmp.setImguser(rs.getString("imguser"));
                 liste.add(tmp);
                 hasnext = rs.next();
             }
@@ -789,6 +839,7 @@ public class Utilisateur {
                 tmp.setNbrpa(rs.getInt("nbrpa"));
                 tmp.setNomuser(rs.getString("nomuser"));
                 tmp.setPrenomuser(rs.getString("prenomuser"));
+                tmp.setImguser(rs.getString("imguser"));
                 liste.add(tmp);
                 hasnext = rs.next();
             }

@@ -3,12 +3,56 @@
 <script>
     $("#activite").removeClass("active");
     $("#profile").removeClass("active");
-    $("#abonnes").addClass("active");</script>
-    <%
-        List<Utilisateur> listeFollowing = u.getAbonnements();
-        List<Utilisateur> listeFollowers = u.getAbonnes();
-        List<Utilisateur> listeDemandeNotAnswered = u.getDemandesNotAnswered();
-    %>
+    $("#abonnes").addClass("active");
+</script>
+<%
+    List<Utilisateur> listeFollowing = u.getAbonnements();
+    List<Utilisateur> listeFollowers = u.getAbonnes();
+    List<Utilisateur> listeDemandeNotAnswered = u.getDemandesNotAnswered();
+%>
+
+<script>
+    var app = angular.module('angularTable', ['angularUtils.directives.dirPagination']);
+    app.controller('notifCtrl', function ($scope, $interval, $http) {
+        $scope.activities = [];
+        $http.get("traite/activites.jsp?iduser=<% out.print(u.getIduser());%>").success(function (response) {
+            $scope.activities = response;
+        });
+        var timer = $interval(function () {
+            $http.get("traite/activites.jsp?iduser=<% out.print(u.getIduser());%>").success(function (response) {
+                $scope.activities = response;
+            });
+        }, 60000);
+        $scope.montrerpartagesaproprepublicationA = function (idpartageur, iduser) {
+            if (iduser === idpartageur)
+                return true;
+            else
+                return false;
+        };
+        $scope.montrerpublierA = function (nomprenom) {
+            if (nomprenom === "null null")
+                return true;
+            else if (nomprenom !== "null null")
+                return false;
+        };
+        $scope.montrerpartagerA = function (nomprenom) {
+            if (nomprenom === "null null")
+                return false;
+            else if (nomprenom !== "null null")
+                return true;
+        };
+        $scope.tempsreel = function (date, heure) {
+            var an = Number(date.split("-")[2]);
+            var mois = Number(date.split("-")[1]);
+            var jour = Number(date.split("-")[0]);
+            var h = Number(heure.split(":")[0]);
+            var min = Number(heure.split(":")[1]);
+            var sec = Number(heure.split(":")[2]);
+            var dateheure = new Date(an, mois - 1, jour, h, min, sec, 0);
+            return moment(dateheure.getTime()).fromNow();
+        };
+    });
+</script>
 <div class="col-md-12  animated fadeInDown">
     <div class="profile-info-right">
         <ul class="nav nav-pills nav-pills-custom-minimal custom-minimal-bottom">
@@ -23,7 +67,7 @@
                     for (Utilisateur utili : listeFollowers) {
                 %>
                 <div class="media user-follower">
-                    <img src="img/Friends/guy-2.jpg" alt="User Avatar" class="media-object pull-left">
+                    <img src="img/<% out.print(utili.getImguser()); %>" alt="User Avatar" class="media-object pull-left">
                     <div class="media-body">
                         <a href="profile.jsp?uid=<%out.print(utili.getIduser());%>"><% out.print(utili.getNomPrenom());%></a><br>
 
@@ -131,7 +175,7 @@
                     for (Utilisateur utili : listeFollowing) {
                 %>
                 <div class="media user-following">
-                    <img src="img/Friends/guy-2.jpg" alt="User Avatar" class="media-object pull-left">
+                    <img src="img/<% out.print(utili.getImguser()); %>" alt="User Avatar" class="media-object pull-left">
                     <div class="media-body">
                         <a href="profile.jsp?uid=<% out.print(utili.getIduser()); %>"><% out.print(utili.getNomPrenom());%></a>
                         <button id="neplussuivre2<% out.print(utili.getIduser()); %>"  type="button" class="btn btn-sm btn-danger pull-right"><i class="fa fa-close-round"></i> Ne plus suivre</button>
@@ -226,7 +270,7 @@
                     for (Utilisateur utili : listeDemandeNotAnswered) {
                 %>
                 <div class="media user-following">
-                    <img src="img/Friends/guy-2.jpg" alt="User Avatar" class="media-object col-md-2">
+                    <img src="img/<% out.print(utili.getImguser()); %>" alt="User Avatar" class="media-object col-md-2">
                     <div class="col-md-7">
                         <a href="profile.jsp?uid=<% out.print(utili.getIduser()); %>"><% out.print(utili.getNomPrenom());%></a>
                         <button id="accepter<% out.print(utili.getIduser()); %>" type="button" class="btn btn-sm btn-primary col-md-5"><i class="fa fa-checkmark-round"></i> Accepter</button>    

@@ -22,7 +22,7 @@
                         <tbody>
                             <tr dir-paginate="result in searchresult | itemsPerPage:7">
                                 <td>
-                                    <img src="img/Friends/guy-2.jpg" alt="img">
+                                    <img src="img/{{result.imguser}}" alt="img">
                                     <a href="profile.jsp?uid={{result.iduser}}" class="user-link">{{result.nomprenomuser}}</a>
                                 </td>
                             </tr>
@@ -41,7 +41,45 @@
 </div>
 <script>
     var app = angular.module('angularTable', ['angularUtils.directives.dirPagination']);
-
+    app.controller('notifCtrl', function ($scope, $interval, $http) {
+        $scope.activities = [];
+        $http.get("traite/activites.jsp?iduser=<% out.print(u.getIduser());%>").success(function (response) {
+            $scope.activities = response;
+        });
+        var timer = $interval(function () {
+            $http.get("traite/activites.jsp?iduser=<% out.print(u.getIduser());%>").success(function (response) {
+                $scope.activities = response;
+            });
+        }, 60000);
+        $scope.montrerpartagesaproprepublicationA = function (idpartageur, iduser) {
+            if (iduser === idpartageur)
+                return true;
+            else
+                return false;
+        };
+        $scope.montrerpublierA = function (nomprenom) {
+            if (nomprenom === "null null")
+                return true;
+            else if (nomprenom !== "null null")
+                return false;
+        };
+        $scope.montrerpartagerA = function (nomprenom) {
+            if (nomprenom === "null null")
+                return false;
+            else if (nomprenom !== "null null")
+                return true;
+        };
+        $scope.tempsreel = function (date, heure) {
+            var an = Number(date.split("-")[2]);
+            var mois = Number(date.split("-")[1]);
+            var jour = Number(date.split("-")[0]);
+            var h = Number(heure.split(":")[0]);
+            var min = Number(heure.split(":")[1]);
+            var sec = Number(heure.split(":")[2]);
+            var dateheure = new Date(an, mois - 1, jour, h, min, sec, 0);
+            return moment(dateheure.getTime()).fromNow();
+        };
+    });
     app.controller('searchCtrl', function ($scope, $http) {
         $scope.searchresult = []; //declare an empty array
         $http.get("traite/searchresult.jsp?q=<% out.print(q);%>").success(function (response) {
