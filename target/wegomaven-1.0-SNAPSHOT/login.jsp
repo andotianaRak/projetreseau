@@ -128,7 +128,7 @@
                                             //  $('#login').show();
                                         },
                                         error: function (resultat, statut, erreur) {
-                                            alert("erreur");
+                                            document.location.href = "";
                                         },
                                         complete: function (resultat, statut) {
                                             //   $('#ajax-loading3').hide();

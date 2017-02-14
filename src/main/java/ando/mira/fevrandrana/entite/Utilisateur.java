@@ -753,6 +753,11 @@ public class Utilisateur {
         return bf.insertionObjI("utilisateur", this);
     }
 
+    public void insertUser() {
+        BasicsFunctions bf = new BasicsFunctions();
+        bf.insertionObj("utilisateur", this);
+    }
+
     // NOTIFICATIONS
     public List<DetPartage> getAllPartagesForNotif() {
         List<DetPartage> liste = new ArrayList();

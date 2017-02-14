@@ -10,7 +10,7 @@
     user.setNomuser(nom);
     user.setPrenomuser(prenom);
     user.setPwduser(pwd);
-    int idnewuser = user.insertNewUserId();
+    user.insertUser();
     session.setMaxInactiveInterval(3600);
     session.setAttribute("id_user", email);
 %>
