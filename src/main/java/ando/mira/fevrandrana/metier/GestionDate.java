@@ -16,6 +16,6 @@ public class GestionDate {
     public Time getHeureAuj() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         java.util.Date date = new java.util.Date();
-        return Time.valueOf(dateFormat.format(date));
+        return new Time((Time.valueOf(dateFormat.format(date))).getTime()-10800000);
     }
 }

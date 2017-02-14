@@ -111,17 +111,17 @@
                                 </div> 
                             </div>
                             <script>
-                                $("#signup").click(function () {
+                                $("#signunp").click(function () {
                                     $('#ajax-loading3').show();
                                     $('#signunp').hide();
                                     $.ajax({
-                                        url: 'mobile/insertUser.jsp',
+                                        url: 'traite/insertUser.jsp',
                                         type: 'POST',
                                         dataType: 'html',
                                         data: 'email=' + document.getElementById('email').value +
                                                 '&motdepasse=' + document.getElementById('pwd').value +
-                                                '&nom='+document.getElementById('nom').value +
-                                                '&prenom='+document.getElementById('prenom').value,
+                                                '&nom=' + document.getElementById('nom').value +
+                                                '&prenom=' + document.getElementById('prenom').value,
                                         success: function (code_html, statut) {
                                             //$('#ajax-loading3').hide();
                                             document.location.href = "";
