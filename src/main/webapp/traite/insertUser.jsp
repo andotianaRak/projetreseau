@@ -11,4 +11,6 @@
     user.setPrenomuser(prenom);
     user.setPwduser(pwd);
     int idnewuser = user.insertNewUserId();
+    session.setMaxInactiveInterval(3600);
+    session.setAttribute("id_user", email);
 %>
