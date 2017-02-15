@@ -362,7 +362,7 @@ public class Utilisateur {
                 + "u.imguser as imgpartageur,d.* "
                 + "FROM utilisateur u INNER JOIN partageabonne pa ON u.iduser=pa.iduser "
                 + "INNER JOIN detpub d ON d.idpublication=pa.idpublication "
-                + "WHERE pa.iduserabonnant=" + this.iduser + " OR pa.iduserabonne=" + this.iduser + " "
+                + "WHERE pa.iduserabonnant=" + this.iduser + "  "
                 + "ORDER BY pa.idpartage DESC";
         System.out.println(query);
         DBConnect db = new DBConnect();
@@ -417,7 +417,7 @@ public class Utilisateur {
         String query = "SELECT distinct p.idpublication, d.* "
                 + "FROM publicationabonne p "
                 + "JOIN detpub d ON p.idpublication = d.idpublication "
-                + "WHERE p.iduserabonnant=" + this.iduser + " OR p.iduserabonne=" + this.iduser + " "
+                + "WHERE p.iduserabonnant=" + this.iduser + "  "
                 + "ORDER BY d.idpublication DESC";
         System.out.println(query);
         DBConnect db = new DBConnect();
