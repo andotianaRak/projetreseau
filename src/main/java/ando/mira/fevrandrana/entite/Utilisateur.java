@@ -20,7 +20,7 @@ public class Utilisateur {
 
     @Override
     public String toString() {
-        return "default,'" + nomuser + "','" + prenomuser + "','" + emailuser + "','" + pwduser + "',null";
+        return "default,'" + nomuser + "','" + prenomuser + "','" + emailuser + "','" + pwduser + "', 'user.jpg'";
     }
 
     public Utilisateur() {
