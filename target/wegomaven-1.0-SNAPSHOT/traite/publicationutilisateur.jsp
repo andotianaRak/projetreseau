@@ -7,6 +7,7 @@
 <%@page import="ando.mira.fevrandrana.entite.Utilisateur"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    response.addHeader("Access-Control-Allow-Origin", "*");
     Utilisateur u = new Utilisateur();
     int iduser = Integer.parseInt(request.getParameter("iduser"));
     u.setIduser(iduser);

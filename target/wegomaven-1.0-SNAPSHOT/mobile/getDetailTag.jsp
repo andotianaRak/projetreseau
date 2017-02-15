@@ -28,6 +28,7 @@
         obj.put("longitude", e.getLongitude());
         obj.put("nbrep", e.getNbrpa());
         obj.put("nomprenom", e.getNomPrenom());
+        obj.put("imguser", e.getImguser());
         arr.put(obj);
     }
     out.println(arr);
