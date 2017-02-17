@@ -240,6 +240,18 @@ public class Utilisateur {
         return response;
     }
 
+    public void insertNewUtilisateur(String nom, String prenom, String email, String mdp, String img) {
+        String query = "insert into utilisateur(nomuser,prenomuser,emailuser,pwduser,imguser) VALUES('" + nom + "','" + prenom + "','" + email + "','" + mdp + "','" + img + "');";
+        try {
+            DBConnect dbc = new DBConnect();
+            Connection c = dbc.getconn();
+            Statement st = c.createStatement();
+            st.executeUpdate(query);
+
+        } catch (SQLException ex) {
+        }
+    }
+
     public int getNombreDePublications() {
         String query = "SELECT count(*) as nbrpub FROM publication WHERE iduser=" + this.getIduser();
         DBConnect dbc = new DBConnect();
